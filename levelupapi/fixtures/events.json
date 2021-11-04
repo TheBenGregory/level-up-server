@@ -1,0 +1,14 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "description": "It's about the cones",
+            "date": "2021-10-21",
+            "time": "15:30:00",
+            "organizer": 1,
+            "attendees": [1]
+        }
+    }
+]
