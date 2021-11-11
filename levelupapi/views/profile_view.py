@@ -15,11 +15,11 @@ def user_profile(request):
         Response -- JSON representation of user info and events
     """
     gamer = Gamer.objects.get(user=request.auth.user)
-    
-    
-    # TODO: Use the django orm to filter events if the gamer is attending the event
-    
+    attending = gamer.attending.all()
+    hosting = gamer.event_set
 
+    # TODO: Use the django orm to filter events if the gamer is attending the event
+    # attending = 
 
     # TODO: Use the orm to filter events if the gamer is hosting the event
     # hosting =
@@ -41,6 +41,7 @@ def user_profile(request):
     return Response(profile)
 
 class UserSerializer(serializers.ModelSerializer):
+    """JSON serializer for gamer's related Django user"""
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username')
@@ -53,6 +54,7 @@ class GamerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gamer
         fields = ('user', 'bio')
+
 
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
@@ -67,4 +69,4 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'game', 'description', 'date', 'time')
+        fields = ('id', 'game', 'description', 'date', 'time', 'organizer')
